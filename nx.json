@@ -1,10 +1,10 @@
 {
-  "npmScope": "@penguin",
+  "npmScope": "penguin",
   "affected": {
     "defaultBase": "main"
   },
   "cli": {
-    "defaultCollection": "@nrwl/workspace"
+    "defaultCollection": "@nrwl/express"
   },
   "implicitDependencies": {
     "package.json": {
@@ -17,12 +17,7 @@
     "default": {
       "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": [
-          "build",
-          "lint",
-          "test",
-          "e2e"
-        ],
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
         "accessToken": "ZDNiMWM4YWUtOTkzZC00OWY4LTlmYjEtOWQ1NmU2ZjkyMzllfHJlYWQtd3JpdGU="
       }
     }
@@ -34,5 +29,6 @@
         "projects": "dependencies"
       }
     ]
-  }
+  },
+  "defaultProject": "express-modular-architecture"
 }
