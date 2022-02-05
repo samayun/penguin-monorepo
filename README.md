@@ -1,10 +1,19 @@
+<h2 align="center">Penguin Monorepo </h2>
 
+<p align="center">
+ <img src="https://c.tenor.com/Z_Z9gYlFDc0AAAAC/hello-penguin.gif" alt="Penguin Repository" style="margin: 0px 15%;text-align:center;width:200px;"/>
+</p>
+<p align="center">
+<img src="https://img.shields.io/github/issues/samayun/penguin-monorepo" alt="Issues">
+<img src="https://img.shields.io/github/forks/samayun/penguin-monorepo" alt="Forks">
 
-# Penguin
+<img src="https://img.shields.io/github/stars/samayun/penguin-monorepo?color=%2312ff65&label=Stars&logo=Star&logoColor=green&style=flat" alt="Stars">
+<img src="https://img.shields.io/github/license/samayun/penguin-monorepo" alt="License">
 
-This project was generated using [Nx](https://nx.dev).
-
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+<a href="https://twitter.com/intent/tweet?text=What a repo ! Wow !Check It =>  :&url=https://github.com/samayun/penguin-monorepo"> 
+<img src="https://img.shields.io/twitter/url?label=Follow@samayunmc&logoColor=%230f0&url=https%3A%2F%2Fgithub.com%2Fsamayun%2Fpenguin-monorepo" alt="Tweet">
+</a>
+</p>
 
 🔎 **Smart, Fast and Extensible Build System**
 
@@ -78,8 +87,6 @@ Run `nx graph` to see a diagram of the dependencies of your projects.
 ## Further help
 
 Visit the [Nx Documentation](https://nx.dev) to learn more.
-
-
 
 ## ☁ Nx Cloud
 
