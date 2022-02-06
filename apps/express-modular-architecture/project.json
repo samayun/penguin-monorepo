@@ -4,30 +4,17 @@
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/node:build",
+      "executor": "@nrwl/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/express-modular-architecture",
-        "main": "apps/express-modular-architecture/src/main.ts",
+        "main": "apps/express-modular-architecture/src/index.ts",
         "tsConfig": "apps/express-modular-architecture/tsconfig.app.json",
-        "assets": ["apps/express-modular-architecture/src/assets"]
-      },
-      "configurations": {
-        "production": {
-          "optimization": true,
-          "extractLicenses": true,
-          "inspect": false,
-          "fileReplacements": [
-            {
-              "replace": "apps/express-modular-architecture/src/environments/environment.ts",
-              "with": "apps/express-modular-architecture/src/environments/environment.prod.ts"
-            }
-          ]
-        }
+        "assets": ["apps/express-modular-architecture/*.md"]
       }
     },
     "serve": {
-      "executor": "@nrwl/node:execute",
+      "executor": "@nrwl/js:node",
       "options": {
         "buildTarget": "express-modular-architecture:build"
       }
