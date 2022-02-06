@@ -4,3 +4,5 @@ package-lock.json
 uploads
 public
 .vscode
+public/*
+.eslintcache

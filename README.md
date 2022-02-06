@@ -29,5 +29,7 @@
  make run
  # detach mode >>
  make start
+ #generate swagger docs
+ npx nx swagger express-modular-architecture
 
 ```
