@@ -26,7 +26,7 @@ module.exports = () => {
         try {
             const user = await authService.login({
                 email: req.body.email,
-                password: req.body.password
+                password: req.body.password,
             });
             // generate access token
             const access_token = await jwt.generateJWTToken({ ...user });
@@ -35,7 +35,7 @@ module.exports = () => {
                 status: 'success',
                 message: `${user.name} logged in successfully`,
                 data: user,
-                access_token
+                access_token,
             });
         } catch (error) {
             console.log(error);
@@ -58,7 +58,7 @@ module.exports = () => {
             res.json({
                 status: 'success',
                 message: `${user.name} register successfully`,
-                data: access_token
+                data: access_token,
             });
         } catch (error) {
             next(error);
@@ -70,7 +70,7 @@ module.exports = () => {
             res.json({
                 status: 'success',
                 message: `Valid profile`,
-                data: await authService.profile(req.user.email)
+                data: await authService.profile(req.user.email),
             });
         } catch (error) {
             next(error);
@@ -82,7 +82,7 @@ module.exports = () => {
             res.json({
                 status: 'success',
                 message: `Valid profile`,
-                data: await authService.getUsers()
+                data: await authService.getUsers(),
             });
         } catch (error) {
             next(error);
@@ -90,6 +90,6 @@ module.exports = () => {
     });
     return {
         path,
-        router
+        router,
     };
 };

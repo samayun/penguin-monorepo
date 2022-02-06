@@ -13,11 +13,11 @@ class MongoCrud {
     }
     async update(keys, params) {
         const updated = await this.Model.findOneAndUpdate(key, {
-            $set: params
+            $set: params,
         });
         return {
             ...updated._doc,
-            ...params
+            ...params,
         };
     }
     async deleteOne(key) {

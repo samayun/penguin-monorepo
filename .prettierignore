@@ -1,4 +1,22 @@
-# Add files here to ignore them from prettier formatting
-
-/dist
-/coverage
+/build/**
+/coverage/**
+/docs/**
+/jsdoc/**
+/templates/**
+/tests/bench/**
+/tests/fixtures/**
+/tests/performance/**
+/tmp/**
+/tools/internal-rules/node_modules/**
+test.js
+!.eslintrc.js
+.vscode-test/
+out/
+dist/
+test-fixtures/
+node_modules/
+.vscode-test/
+out/
+dist/
+test-fixtures/
+node_modules/

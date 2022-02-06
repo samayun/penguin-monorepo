@@ -25,8 +25,8 @@ setRoutes(app);
                 '\x1b[47m\x1b[46m%s\x1b[0m',
                 `🧠 Server running on 👀`,
                 '\x1b[1m\x1b[5m',
-                `${host}:${port}`
-            )
+                `${host}:${port}`,
+            ),
         );
     } catch (error) {
         console.log(error || 'Server Down');

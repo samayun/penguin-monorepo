@@ -1,39 +1,39 @@
 {
-  "root": "apps/express-modular-architecture",
-  "sourceRoot": "apps/express-modular-architecture/src",
-  "projectType": "application",
-  "targets": {
-    "build": {
-      "executor": "@nrwl/js:tsc",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputPath": "dist/apps/express-modular-architecture",
-        "main": "apps/express-modular-architecture/src/index.ts",
-        "tsConfig": "apps/express-modular-architecture/tsconfig.app.json",
-        "assets": ["apps/express-modular-architecture/*.md"]
-      }
+    "root": "apps/express-modular-architecture",
+    "sourceRoot": "apps/express-modular-architecture/src",
+    "projectType": "application",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/js:tsc",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "outputPath": "dist/apps/express-modular-architecture",
+                "main": "apps/express-modular-architecture/src/index.ts",
+                "tsConfig": "apps/express-modular-architecture/tsconfig.app.json",
+                "assets": ["apps/express-modular-architecture/*.md"]
+            }
+        },
+        "serve": {
+            "executor": "@nrwl/js:node",
+            "options": {
+                "buildTarget": "express-modular-architecture:build"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["apps/express-modular-architecture/src/**/*.js"]
+            }
+        },
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": ["coverage/apps/express-modular-architecture"],
+            "options": {
+                "jestConfig": "apps/express-modular-architecture/jest.config.js",
+                "passWithNoTests": true
+            }
+        }
     },
-    "serve": {
-      "executor": "@nrwl/js:node",
-      "options": {
-        "buildTarget": "express-modular-architecture:build"
-      }
-    },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["apps/express-modular-architecture/**/*.ts"]
-      }
-    },
-    "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/express-modular-architecture"],
-      "options": {
-        "jestConfig": "apps/express-modular-architecture/jest.config.js",
-        "passWithNoTests": true
-      }
-    }
-  },
-  "tags": []
+    "tags": []
 }

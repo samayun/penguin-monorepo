@@ -44,8 +44,8 @@ Architect an express.js application
   ➡️ Architechture
   </summary>
 
-- ✅ Modular way
-- ✅ Monolithic - Layered Architechture (3 Tier, actually 2 tier implemented here)
+-   ✅ Modular way
+-   ✅ Monolithic - Layered Architechture (3 Tier, actually 2 tier implemented here)
 
 </details>
 
@@ -54,10 +54,10 @@ Architect an express.js application
   ➡️ Design Patterns
     </summary>
 
-- [x] MVC - Model View Controller
-- [x] Singleton Pattern- global sharable instance suppose one database in whole application
-- [x] Facade Pattern - multiple database connection with same functionality
-- [x] Service Repository Pattern
+-   [x] MVC - Model View Controller
+-   [x] Singleton Pattern- global sharable instance suppose one database in whole application
+-   [x] Facade Pattern - multiple database connection with same functionality
+-   [x] Service Repository Pattern
 
 </details>
 <details>
@@ -65,10 +65,10 @@ Architect an express.js application
  ➡️ Languages/Framework/Library
 </summary>
 
-- Language: ↪️ [Node.js](https://nodejs.org/en) as JS server side runtime
-- Framework: ↪️ [Express.js](https://expressjs.com) as web framework
-- Database: ↪️ [MongoDB](https://www.mongodb.com) as NoSQL Database
-- Documentation: ↪️ [Swagger](https://swagger.io)
+-   Language: ↪️ [Node.js](https://nodejs.org/en) as JS server side runtime
+-   Framework: ↪️ [Express.js](https://expressjs.com) as web framework
+-   Database: ↪️ [MongoDB](https://www.mongodb.com) as NoSQL Database
+-   Documentation: ↪️ [Swagger](https://swagger.io)
 
 </details>
 
@@ -77,7 +77,7 @@ Architect an express.js application
  ➡️ Virtualization
 </summary>
 
-- Build Container by Docker : `make build` or `docker build . -t samayun/penguin`
-- Run Container by Docker: `make run` or `docker run -p 5000:8080 -d samayun/penguin`
+-   Build Container by Docker : `make build` or `docker build . -t samayun/penguin`
+-   Run Container by Docker: `make run` or `docker run -p 5000:8080 -d samayun/penguin`
 
 </details>
