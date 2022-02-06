@@ -16,16 +16,26 @@ setRoutes(app);
 (async function main() {
     try {
         // Connect Database
-        const client = await connectDB();
-
-        console.log(client);
+        await connectDB();
         /*
          * Listen to server
          */
-        app.listen(port, () => console.log(`${host}:${port}`));
+        app.listen(port, () =>
+            console.log(
+                '\x1b[47m\x1b[46m%s\x1b[0m',
+                `🧠 Server running on 👀`,
+                '\x1b[1m\x1b[5m',
+                `${host}:${port}`
+            )
+        );
     } catch (error) {
         console.log(error || 'Server Down');
     }
 })();
+
+if (process.env.NODE_ENV === 'production') {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    console.log = function () {};
+}
 
 module.exports = app;

@@ -1,8 +1,8 @@
 const CrudService = require('../../../app/services/crud.service');
 
 class NewsService extends CrudService {
-  constructor(model) {
-    super(model);
-  }
+    constructor(model) {
+        super(model);
+    }
 }
-module.exports = (model) => new NewsService(model);
+module.exports = model => new NewsService(model);
