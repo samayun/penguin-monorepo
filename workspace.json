@@ -1,6 +1,7 @@
 {
   "version": 2,
   "projects": {
-    "express-modular-architecture": "apps/express-modular-architecture"
+    "express-modular-architecture": "apps/express-modular-architecture",
+    "expressjs-boilerplate": "apps/expressjs-boilerplate"
   }
 }
