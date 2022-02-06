@@ -18,8 +18,8 @@ ENV DB_HOST cluster0.khadd.mongodb.net
 ENV DB_USER staging
 ENV DB_PASSWORD staging
 ENV JWT_SECRET_KEY Penguin
-ENV PORT 8080
+ENV PORT 1111
 
-EXPOSE 8080
+EXPOSE 1111
 
 CMD ["npm", "run", "start"]
