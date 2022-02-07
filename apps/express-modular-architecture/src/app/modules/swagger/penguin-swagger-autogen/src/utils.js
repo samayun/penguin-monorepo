@@ -187,5 +187,5 @@ module.exports = {
     resolvePatternPath,
     stackSymbolRecognizer,
     stack0SymbolRecognizer,
-    getFirstPosition,
+    getFirstPosition
 };

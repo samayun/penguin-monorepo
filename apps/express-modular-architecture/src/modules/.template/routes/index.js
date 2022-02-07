@@ -2,15 +2,15 @@ const path = '/v1/tests';
 const router = require('express').Router();
 
 module.exports = () => {
-    router.get('/', (req, res, next) => {
-        /* #swagger.tags = ['__template'] */
+    router.get('/list', (req, res, next) => {
+        /* #swagger.tags = ['.template'] */
         res.status(200).json({
-            message: 'TEmp Swagger Docs',
+            message: 'Get all tests'
         });
     });
 
     return {
         path,
-        router,
+        router
     };
 };

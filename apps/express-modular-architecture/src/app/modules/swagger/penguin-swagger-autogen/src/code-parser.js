@@ -101,7 +101,7 @@ function jsParser(data) {
                     end,
                     kind: item.kind,
                     typeof: typeof value,
-                    value,
+                    value
                 });
             }
         }
@@ -265,13 +265,13 @@ async function resolvePathVariables(rawPath, bytePosition, jsParsed, importedFil
                 let varName = e.split(new RegExp('\\}|\\+\\"|\\+\'|\\+\\`'))[0];
                 let varKey = varName.split('.')[0];
                 let resolvedVariables = jsParsed.variables.filter(
-                    v => v.name == varKey && v.end <= bytePosition,
+                    v => v.name == varKey && v.end <= bytePosition
                 );
                 let exportPath = null;
                 if (!resolvedVariables || resolvedVariables.length == 0) {
                     // Variable in other file
                     let idx = importedFiles.findIndex(
-                        e => e.varFileName && varKey && e.varFileName == varKey,
+                        e => e.varFileName && varKey && e.varFileName == varKey
                     );
                     if (idx == -1) {
                         // Second, tries to find in the 'exports' of import/require, such as 'foo' in the: import { foo } from './fooFile'
@@ -282,7 +282,7 @@ async function resolvePathVariables(rawPath, bytePosition, jsParsed, importedFil
                             let found =
                                 imp && imp.exports
                                     ? imp.exports.find(
-                                          e => e.varName && varKey && e.varName == varKey,
+                                          e => e.varName && varKey && e.varName == varKey
                                       )
                                     : null;
                             if (found) {
@@ -294,14 +294,14 @@ async function resolvePathVariables(rawPath, bytePosition, jsParsed, importedFil
                         let extension = await utils.getExtension(pathFile);
                         let fileContent = await utils.getFileContent(pathFile + extension);
                         const jsExternalParsed = jsParser(
-                            await handleData.removeComments(fileContent, true),
+                            await handleData.removeComments(fileContent, true)
                         );
                         if (varName.includes('.')) {
                             varKey = varName.split('.')[1];
                         }
 
                         resolvedVariables = jsExternalParsed.variables.filter(
-                            v => v.name == varKey && v.end <= bytePosition,
+                            v => v.name == varKey && v.end <= bytePosition
                         );
                     }
                 }
@@ -314,7 +314,7 @@ async function resolvePathVariables(rawPath, bytePosition, jsParsed, importedFil
                     if (varName.split('.').length > 1 && resolvedVariables[0].typeof == 'object') {
                         value = searchInObject(
                             resolvedVariables[0].value,
-                            varName.split('.').slice(1).join('.'),
+                            varName.split('.').slice(1).join('.')
                         );
                     } else {
                         value = resolvedVariables[0].value;
@@ -414,5 +414,5 @@ module.exports = {
     removeCharacter,
     resolvePathVariables,
     resolveVariableValue,
-    searchInObject,
+    searchInObject
 };

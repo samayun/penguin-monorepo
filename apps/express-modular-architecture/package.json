@@ -5,11 +5,13 @@
     "description": "Penguin is an opinionated express framework provides rapid development facility",
     "scripts": {
         "start": "npm run build && node src/index",
-        "dev": "nodemon -L src/index",
+        "watch:app": "nodemon -L src/index",
+        "watch:modules": "SHELL=/bin/bash chokidar \"src/**/routes/*.js\" -c \"npm run swagger\"",
+        "dev": "concurrently npm:watch:*",
         "build": "npm run swagger",
         "swagger": "cd src && node swagger.js",
-        "lint": "eslint --ignore-path ./.gitignore .",
-        "format": "prettier --write \"src/**/*.js\" "
+        "lint": "eslint --ignore-path .gitignore .",
+        "format": "prettier --write \"src/**/*.js\" \"test/**/*.js\""
     },
     "keywords": [
         "nodejs-framework",

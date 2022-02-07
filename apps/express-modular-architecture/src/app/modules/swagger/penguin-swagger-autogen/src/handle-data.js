@@ -17,14 +17,14 @@ function dataConverter(data) {
             if (!data) {
                 return resolve({
                     data,
-                    patterns: [],
+                    patterns: []
                 });
             }
 
             let founds = data.split(
                 new RegExp(
-                    '(require\\s*\\n*\\t*\\(.*\\)\\s*\\n*\\t*\\(\\s*\\n*\\t*.*\\s*\\n*\\t*\\))',
-                ),
+                    '(require\\s*\\n*\\t*\\(.*\\)\\s*\\n*\\t*\\(\\s*\\n*\\t*.*\\s*\\n*\\t*\\))'
+                )
             );
             for (let idx = 0; idx < founds.length; ++idx) {
                 let req = founds[idx];
@@ -49,12 +49,12 @@ function dataConverter(data) {
             }
             return resolve({
                 data,
-                patterns: [...patterns],
+                patterns: [...patterns]
             });
         } catch (err) {
             return resolve({
                 data: origData,
-                patterns: [],
+                patterns: []
             });
         }
     });
@@ -77,11 +77,11 @@ function clearData(data) {
             try {
                 data = data
                     .split(
-                        new RegExp('\\s*\\n*\\t*\\.\\s*\\n*\\t*headers\\s*\\n*\\t*\\[\\s*\\n*\\t*'),
+                        new RegExp('\\s*\\n*\\t*\\.\\s*\\n*\\t*headers\\s*\\n*\\t*\\[\\s*\\n*\\t*')
                     )
                     .join('.headers[');
                 data = data.split(
-                    new RegExp('\\s*\\n*\\t*\\.\\s*\\n*\\t*header\\s*\\n*\\t*\\(\\s*\\n*\\t*'),
+                    new RegExp('\\s*\\n*\\t*\\.\\s*\\n*\\t*header\\s*\\n*\\t*\\(\\s*\\n*\\t*')
                 );
                 if (data.length > 1) {
                     for (let idxHeader = 1; idxHeader < data.length; ++idxHeader) {
@@ -93,7 +93,7 @@ function clearData(data) {
                 }
                 data = data
                     .split(
-                        new RegExp('\\s*\\n*\\t*\\.\\s*\\n*\\t*header\\s*\\n*\\t*\\(\\s*\\n*\\t*'),
+                        new RegExp('\\s*\\n*\\t*\\.\\s*\\n*\\t*header\\s*\\n*\\t*\\(\\s*\\n*\\t*')
                     )
                     .join('.headers(');
                 if (data.split('.headers[').length > 1) {
@@ -104,7 +104,7 @@ function clearData(data) {
                             let str = popString(d);
                             d = d.replace(
                                 new RegExp(`.${str}.`),
-                                `${statics.STRING_QUOTE}${str}${statics.STRING_QUOTE}`,
+                                `${statics.STRING_QUOTE}${str}${statics.STRING_QUOTE}`
                             );
                             data[idxHeaders] = d;
                         }
@@ -652,7 +652,7 @@ function addReferenceToMethods(data, patterns) {
         try {
             // CASE: router.route('/user').get(authorize, (req, res) => {
             let aDataRoute = auxData.split(
-                new RegExp(`.*\\s*\\n*\\t*\\.\\s*\\n*\\t*route\\s*\\n*\\t*\\(`),
+                new RegExp(`.*\\s*\\n*\\t*\\.\\s*\\n*\\t*route\\s*\\n*\\t*\\(`)
             );
             if (aDataRoute.length > 1) {
                 for (let idx = 1; idx < aDataRoute.length; ++idx) {
@@ -660,9 +660,7 @@ function addReferenceToMethods(data, patterns) {
                     for (let mIdx = 0; mIdx < statics.METHODS.length; ++mIdx) {
                         let method = statics.METHODS[mIdx];
                         let line = aDataRoute[idx].split(
-                            new RegExp(
-                                `\\)(\\s*|\\n*|\\t*)\\.\\s*\\n*\\t*${method}\\s*\\n*\\t*\\(`,
-                            ),
+                            new RegExp(`\\)(\\s*|\\n*|\\t*)\\.\\s*\\n*\\t*${method}\\s*\\n*\\t*\\(`)
                         );
                         if (line.length === 3) {
                             line[0] = line[0].split(')')[0];
@@ -675,11 +673,11 @@ function addReferenceToMethods(data, patterns) {
                                         `\\)(\\s*|\\n*|\\t*)\\.\\s*\\n*\\t*put\\s*\\n*\\t*\\(|` +
                                         `\\)(\\s*|\\n*|\\t*)\\.\\s*\\n*\\t*delete\\s*\\n*\\t*\\(|` +
                                         `\\)(\\s*|\\n*|\\t*)\\.\\s*\\n*\\t*patch\\s*\\n*\\t*\\(|` +
-                                        `\\)(\\s*|\\n*|\\t*)\\.\\s*\\n*\\t*options\\s*\\n*\\t*\\(`,
-                                ),
+                                        `\\)(\\s*|\\n*|\\t*)\\.\\s*\\n*\\t*options\\s*\\n*\\t*\\(`
+                                )
                             )[0];
                             routeEndpoints.push(
-                                (patterns[0] || '_app') + `.${method}(` + line[0] + ',' + line[2],
+                                (patterns[0] || '_app') + `.${method}(` + line[0] + ',' + line[2]
                             );
                         }
                     }
@@ -720,17 +718,17 @@ function addReferenceToMethods(data, patterns) {
                     if (auxData && auxData.length > 1 && method == 'use') {
                         for (let idxData = 1; idxData < auxData.length; ++idxData) {
                             let chainedUse = auxData[idxData].split(
-                                new RegExp(`\\)\\s*\\n*\\t*\\.\\s*\\n*\\t*use\\s*\\n*\\t*\\(`),
+                                new RegExp(`\\)\\s*\\n*\\t*\\.\\s*\\n*\\t*use\\s*\\n*\\t*\\(`)
                             );
                             if (chainedUse.length > 1) {
                                 auxData[idxData] = chainedUse.join(
-                                    `) ${pattern}` + `.use([_[use]_])([_[${pattern}]_])(`,
+                                    `) ${pattern}` + `.use([_[use]_])([_[${pattern}]_])(`
                                 );
                             }
                         }
                     }
                     auxData = auxData.join(
-                        (pattern || '_app') + `.${method}([_[${method}]_])([_[${pattern}]_])(`,
+                        (pattern || '_app') + `.${method}([_[${method}]_])([_[${pattern}]_])(`
                     );
                 }
 
@@ -744,7 +742,7 @@ function addReferenceToMethods(data, patterns) {
                             .split('([_[')[0].length;
                         auxData[idxPtn] = auxData[idxPtn].replace(
                             ']_])(',
-                            `]_])([_[${bytePosition}]_])(`,
+                            `]_])([_[${bytePosition}]_])(`
                         );
                         bytePosition += auxBytePosition;
                     }
@@ -773,19 +771,19 @@ function getQueryIndirectly(elem, request, objParameters) {
             if (
                 req &&
                 req.split(
-                    new RegExp('\\;|\\{|\\(|\\[|\\"|\\\'|\\`|\\}|\\)|\\]|\\:|\\,|\\*|\\!|\\|'),
+                    new RegExp('\\;|\\{|\\(|\\[|\\"|\\\'|\\`|\\}|\\)|\\]|\\:|\\,|\\*|\\!|\\|')
                 ).length == 1 &&
                 elem &&
                 elem.split(
                     new RegExp(
                         ' .*?\\s*\\t*=\\s*\\t*' + req + '\\.\\s*\\t*query(\\s|\\n|;|\\t)',
-                        'gmi',
-                    ).length > 1,
+                        'gmi'
+                    ).length > 1
                 )
             ) {
                 let queryVars = [];
                 let aQuerys = elem.split(
-                    new RegExp('\\s*\\t*=\\s*\\t*' + req + '\\.\\s*\\t*query(\\s|\\n|;|\\t)', 'i'),
+                    new RegExp('\\s*\\t*=\\s*\\t*' + req + '\\.\\s*\\t*query(\\s|\\n|;|\\t)', 'i')
                 );
                 aQuerys = aQuerys.slice(0, -1);
 
@@ -794,7 +792,7 @@ function getQueryIndirectly(elem, request, objParameters) {
                     for (let idx = 0; idx < aQuerys.length; idx++) {
                         if (aQuerys[idx] && aQuerys[idx].replaceAll(' ', '') != '') {
                             queryVars.push(
-                                aQuerys[idx].split(new RegExp('\\s*|\\t*')).slice(-1)[0],
+                                aQuerys[idx].split(new RegExp('\\s*|\\t*')).slice(-1)[0]
                             );
                         }
                     }
@@ -804,20 +802,20 @@ function getQueryIndirectly(elem, request, objParameters) {
                                 query &&
                                 query.split(
                                     new RegExp(
-                                        '\\;|\\{|\\(|\\[|\\"|\\\'|\\`|\\}|\\)|\\]|\\:|\\,|\\*|\\!|\\|',
-                                    ),
+                                        '\\;|\\{|\\(|\\[|\\"|\\\'|\\`|\\}|\\)|\\]|\\:|\\,|\\*|\\!|\\|'
+                                    )
                                 ).length == 1
                             ) {
                                 let varNames = elem
                                     .split(new RegExp(' ' + query + '\\.'))
                                     .splice(1);
                                 varNames = varNames.map(
-                                    v => (v = v.split(new RegExp('\\s|;|\\n|\\t'))[0]),
+                                    v => (v = v.split(new RegExp('\\s|;|\\n|\\t'))[0])
                                 );
                                 varNames.forEach(name => {
                                     objParameters[name] = {
                                         name,
-                                        in: 'query',
+                                        in: 'query'
                                     };
                                 });
                             }
@@ -853,8 +851,8 @@ function getStatus(elem, response, objResponses) {
                             res +
                                 '\\s*\\n*\\t*\\.\\s*\\n*\\t*status\\s*\\(|' +
                                 res +
-                                '\\s*\\n*\\t*\\.\\s*\\n*\\t*sendStatus\\s*\\(',
-                        ),
+                                '\\s*\\n*\\t*\\.\\s*\\n*\\t*sendStatus\\s*\\('
+                        )
                     ).length > 1
             ) {
                 elem.replaceAll(' ', '')
@@ -863,8 +861,8 @@ function getStatus(elem, response, objResponses) {
                             res +
                                 '\\s*\\n*\\t*\\.\\s*\\n*\\t*status\\s*\\(|' +
                                 res +
-                                '\\s*\\n*\\t*\\.\\s*\\n*\\t*sendStatus\\s*\\(',
-                        ),
+                                '\\s*\\n*\\t*\\.\\s*\\n*\\t*sendStatus\\s*\\('
+                        )
                     )
                     .splice(1)
                     .forEach(async s => {
@@ -887,8 +885,8 @@ function getStatus(elem, response, objResponses) {
                                         description:
                                             tables.getHttpStatusDescription(
                                                 sts,
-                                                swaggerTags.getLanguage(),
-                                            ) || '',
+                                                swaggerTags.getLanguage()
+                                            ) || ''
                                     };
                                 } else if (utils.isNumeric(sts) && !!objResponses[sts] === true) {
                                     // concatenated with existing information
@@ -896,9 +894,9 @@ function getStatus(elem, response, objResponses) {
                                         description:
                                             tables.getHttpStatusDescription(
                                                 sts,
-                                                swaggerTags.getLanguage(),
+                                                swaggerTags.getLanguage()
                                             ) || '',
-                                        ...objResponses[sts],
+                                        ...objResponses[sts]
                                     };
                                 }
                             });
@@ -907,8 +905,8 @@ function getStatus(elem, response, objResponses) {
                                 description:
                                     tables.getHttpStatusDescription(
                                         status,
-                                        swaggerTags.getLanguage(),
-                                    ) || '',
+                                        swaggerTags.getLanguage()
+                                    ) || ''
                             };
                         } else if (utils.isNumeric(status) && !!objResponses[status] === true) {
                             // concatenated with existing information
@@ -916,9 +914,9 @@ function getStatus(elem, response, objResponses) {
                                 description:
                                     tables.getHttpStatusDescription(
                                         status,
-                                        swaggerTags.getLanguage(),
+                                        swaggerTags.getLanguage()
                                     ) || '',
-                                ...objResponses[status],
+                                ...objResponses[status]
                             };
                         }
                     });
@@ -939,25 +937,22 @@ function getStatus(elem, response, objResponses) {
                                 res +
                                 '\\s*\\n*\\t*\\.\\s*\\n*\\t*json\\s*\\(|' +
                                 res +
-                                '\\s*\\n*\\t*\\.\\s*\\n*\\t*sendFile\\s*\\(',
-                        ),
+                                '\\s*\\n*\\t*\\.\\s*\\n*\\t*sendFile\\s*\\('
+                        )
                     ).length > 1
             ) {
                 if (!!objResponses[200] === false) {
                     objResponses[200] = {
-                        description: tables.getHttpStatusDescription(
-                            200,
-                            swaggerTags.getLanguage(),
-                        ),
+                        description: tables.getHttpStatusDescription(200, swaggerTags.getLanguage())
                     };
                 } else if (!!objResponses[200] === true) {
                     // concatenated with existing information
                     objResponses[200] = {
                         description: tables.getHttpStatusDescription(
                             200,
-                            swaggerTags.getLanguage(),
+                            swaggerTags.getLanguage()
                         ),
-                        ...objResponses[200],
+                        ...objResponses[200]
                     };
                 }
             }
@@ -1031,7 +1026,7 @@ function getHeaderQueryBody(elem, request, objParameters) {
             .join('.body ');
         elem = elem
             .split(
-                new RegExp('\\s*\\n*\\t*\\.\\s*\\n*\\t*headers\\s*\\n*\\t*[\\;|\\,|\\}|\\]|\\)]'),
+                new RegExp('\\s*\\n*\\t*\\.\\s*\\n*\\t*headers\\s*\\n*\\t*[\\;|\\,|\\}|\\]|\\)]')
             )
             .join('.headers ');
     }
@@ -1079,7 +1074,7 @@ function getHeaderQueryBody(elem, request, objParameters) {
                                 // Checks if the parameter name already exists
                                 objParameters[name] = {
                                     name,
-                                    in: 'header',
+                                    in: 'header'
                                 };
                             }
                             if (!objParameters[name].in) {
@@ -1108,7 +1103,7 @@ function getHeaderQueryBody(elem, request, objParameters) {
                     .length > 1
             ) {
                 let elems = elem.split(
-                    new RegExp('\\}\\s*\\n*\\t*\\=\\s*\\n*\\t*' + req + '.headers\\s+'),
+                    new RegExp('\\}\\s*\\n*\\t*\\=\\s*\\n*\\t*' + req + '.headers\\s+')
                 );
                 for (let idxHeader = 0; idxHeader < elems.length - 1; ++idxHeader) {
                     let header = elems[idxHeader]; //objBody
@@ -1147,7 +1142,7 @@ function getHeaderQueryBody(elem, request, objParameters) {
                                 // Checks if the parameter name already exists
                                 objParameters[name] = {
                                     name,
-                                    in: 'header',
+                                    in: 'header'
                                 };
                             }
                             if (!objParameters[name].in) {
@@ -1199,7 +1194,7 @@ function getHeaderQueryBody(elem, request, objParameters) {
                                 // Checks if the parameter name already exists
                                 objParameters[name] = {
                                     name,
-                                    in: 'header',
+                                    in: 'header'
                                 };
                             }
                             if (!objParameters[name].in) {
@@ -1249,7 +1244,7 @@ function getHeaderQueryBody(elem, request, objParameters) {
                                 // Checks if the parameter name already exists
                                 objParameters[name] = {
                                     name,
-                                    in: 'query',
+                                    in: 'query'
                                 };
                             }
                             if (!objParameters[name].in) {
@@ -1280,7 +1275,7 @@ function getHeaderQueryBody(elem, request, objParameters) {
                     .length > 1
             ) {
                 let elems = elem.split(
-                    new RegExp('\\}\\s*\\n*\\t*\\=\\s*\\n*\\t*' + req + '.query\\s+'),
+                    new RegExp('\\}\\s*\\n*\\t*\\=\\s*\\n*\\t*' + req + '.query\\s+')
                 );
                 for (let idxQuery = 0; idxQuery < elems.length - 1; ++idxQuery) {
                     let query = elems[idxQuery]; //objBody
@@ -1325,7 +1320,7 @@ function getHeaderQueryBody(elem, request, objParameters) {
                                 // Checks if the parameter name already exists
                                 objParameters[name] = {
                                     name,
-                                    in: 'query',
+                                    in: 'query'
                                 };
                             }
                             if (!objParameters[name].in) {
@@ -1371,14 +1366,14 @@ function getHeaderQueryBody(elem, request, objParameters) {
                                 in: 'body',
                                 schema: {
                                     type: 'object',
-                                    properties: {},
-                                },
+                                    properties: {}
+                                }
                             };
                         }
                         if (!!objParameters['__obj__in__body__'] === true) {
                             // Checks if the parameter name already exists
                             objParameters['__obj__in__body__'].schema.properties[name] = {
-                                example: 'any',
+                                example: 'any'
                             };
                         }
                     });
@@ -1397,7 +1392,7 @@ function getHeaderQueryBody(elem, request, objParameters) {
                     .length > 1
             ) {
                 let elems = elem.split(
-                    new RegExp('\\}\\s*\\n*\\t*\\=\\s*\\n*\\t*' + req + '.body\\s+'),
+                    new RegExp('\\}\\s*\\n*\\t*\\=\\s*\\n*\\t*' + req + '.body\\s+')
                 );
                 for (let idxBody = 0; idxBody < elems.length - 1; ++idxBody) {
                     let objBody = elems[idxBody];
@@ -1435,14 +1430,14 @@ function getHeaderQueryBody(elem, request, objParameters) {
                                 in: 'body',
                                 schema: {
                                     type: 'object',
-                                    properties: {},
-                                },
+                                    properties: {}
+                                }
                             };
                         }
                         if (!!objParameters['__obj__in__body__'] === true) {
                             // Checks if the parameter name already exists
                             objParameters['__obj__in__body__'].schema.properties[name] = {
-                                example: 'any',
+                                example: 'any'
                             };
                         }
                     });
@@ -1464,7 +1459,7 @@ async function getCallbackParameters(data) {
         return {
             req: [],
             res: [],
-            next: [],
+            next: []
         };
     }
     let req = new Set();
@@ -1496,8 +1491,8 @@ async function getCallbackParameters(data) {
                 if (arrowFunctionWithoutCurlyBracketPos.length == 1)
                     traditionalFunctionPos = pos.split(
                         new RegExp(
-                            `(\\s*\\n*\\t*\\:?\\s*\\n*\\t*\\w*\\s*\\n*\\t*\\<?\\s*\\n*\\t*\\w*\\s*\\n*\\t*\\>?\\s*\\n*\\t*\\{)`,
-                        ),
+                            `(\\s*\\n*\\t*\\:?\\s*\\n*\\t*\\w*\\s*\\n*\\t*\\<?\\s*\\n*\\t*\\w*\\s*\\n*\\t*\\>?\\s*\\n*\\t*\\{)`
+                        )
                     );
             }
 
@@ -1690,13 +1685,13 @@ async function getCallbackParameters(data) {
         return {
             req: [...req],
             res: [...res],
-            next: [...next],
+            next: [...next]
         };
     } catch (err) {
         return {
             req: [...req],
             res: [...res],
-            next: [...next],
+            next: [...next]
         };
     }
 }
@@ -1728,15 +1723,15 @@ async function getPathParameters(path, objParameters) {
                             in: 'path',
                             required: true,
                             schema: {
-                                type: 'string',
-                            },
+                                type: 'string'
+                            }
                         };
                     } else {
                         objParameters[name] = {
                             name,
                             in: 'path',
                             required: true,
-                            type: 'string',
+                            type: 'string'
                         }; // by deafult 'type' is 'string'
                     }
 
@@ -1768,7 +1763,7 @@ async function functionRecognizerInData(data, functionName) {
     try {
         let func = null;
         functionName = functionName.split(
-            new RegExp('\\;|\\{|\\(|\\[|\\"|\\\'|\\`|\\}|\\)|\\]|\\:|\\,|\\*|\\+'),
+            new RegExp('\\;|\\{|\\(|\\[|\\"|\\\'|\\`|\\}|\\)|\\]|\\:|\\,|\\*|\\+')
         );
         if (functionName.length > 1) {
             functionName = functionName.filter(r => r != '');
@@ -1787,37 +1782,37 @@ async function functionRecognizerInData(data, functionName) {
 
         if (
             data.split(
-                new RegExp(`\\w+${functionName}|${functionName}\\w+|\\w+${functionName}\\w+`),
+                new RegExp(`\\w+${functionName}|${functionName}\\w+|\\w+${functionName}\\w+`)
             ).length > 1
         ) {
             data = data.replaceAll(`.headers.${functionName}`, '____HEADERS____');
             data = data.replaceAll(
                 new RegExp(`var\\s+\\n*\\t*\\{\\s*\\n*\\t*${functionName}`),
-                '____VARIABLE_DEST____',
+                '____VARIABLE_DEST____'
             );
             data = data.replaceAll(
                 new RegExp(`let\\s+\\n*\\t*\\{\\s*\\n*\\t*${functionName}`),
-                '____VARIABLE_DEST____',
+                '____VARIABLE_DEST____'
             );
             data = data.replaceAll(
                 new RegExp(`const\\s+\\n*\\t*\\{\\s*\\n*\\t*${functionName}`),
-                '____VARIABLE_DEST____',
+                '____VARIABLE_DEST____'
             );
             data = data.replaceAll(
                 new RegExp(`\\,\\s*\\n*\\t*${functionName}`),
-                '____VARIABLE____',
+                '____VARIABLE____'
             );
             data = data.replaceAll(
                 new RegExp(`body\\s*\\n*\\t*\\.\\s*\\n*\\t*${functionName}`),
-                '____VARIABLE_BODY____',
+                '____VARIABLE_BODY____'
             );
             data = data.replaceAll(
                 new RegExp(`query\\s*\\n*\\t*\\.\\s*\\n*\\t*${functionName}`),
-                '____VARIABLE_QUERY____',
+                '____VARIABLE_QUERY____'
             );
             data = data.replaceAll(
                 new RegExp(`headers\\s*\\n*\\t*\\.\\s*\\n*\\t*${functionName}`),
-                '____VARIABLE_HEADERS____',
+                '____VARIABLE_HEADERS____'
             );
 
             data = data.split(new RegExp(`${functionName}`));
@@ -1837,7 +1832,7 @@ async function functionRecognizerInData(data, functionName) {
                 data = data[0];
             }
             data = data.split(
-                new RegExp(`\\w+${functionName}|${functionName}\\w+|\\w+${functionName}\\w+`),
+                new RegExp(`\\w+${functionName}|${functionName}\\w+|\\w+${functionName}\\w+`)
             );
             data = data.join('____FUNC____');
 
@@ -1854,8 +1849,8 @@ async function functionRecognizerInData(data, functionName) {
 
         let arrowFunction = data.split(
             new RegExp(
-                `(${functionName}\\s*\\n*\\t*\\:?\\s*\\n*\\t*\\w*\\s*\\n*\\t*\\=\\s*\\n*\\t*\\([\\s\\S]*\\)\\s*\\t*=>\\s*\\n*\\t*\\{)`,
-            ),
+                `(${functionName}\\s*\\n*\\t*\\:?\\s*\\n*\\t*\\w*\\s*\\n*\\t*\\=\\s*\\n*\\t*\\([\\s\\S]*\\)\\s*\\t*=>\\s*\\n*\\t*\\{)`
+            )
         );
         let arrowFunctionWithoutCurlyBracket = [''];
         let traditionalFunction = [''];
@@ -1864,15 +1859,15 @@ async function functionRecognizerInData(data, functionName) {
         if (arrowFunction.length == 1) {
             arrowFunctionWithoutCurlyBracket = data.split(
                 new RegExp(
-                    `(${functionName}\\s*\\n*\\t*\\:?\\s*\\n*\\t*\\w*\\s*\\n*\\t*\\=\\s*\\n*\\t*\\([\\s\\S]*\\)\\s*\\t*=>)`,
-                ),
+                    `(${functionName}\\s*\\n*\\t*\\:?\\s*\\n*\\t*\\w*\\s*\\n*\\t*\\=\\s*\\n*\\t*\\([\\s\\S]*\\)\\s*\\t*=>)`
+                )
             );
             if (arrowFunctionWithoutCurlyBracket.length == 1) {
                 // CASE:  foo: (req, res) => {
                 arrowFunction = data.split(
                     new RegExp(
-                        `(${functionName}\\s*\\n*\\t*\\:?\\s*\\n*\\t*\\s*\\n*\\t*\\s*\\n*\\t*\\([\\s\\S]*\\)\\s*\\t*=>\\s*\\n*\\t*\\{)`,
-                    ),
+                        `(${functionName}\\s*\\n*\\t*\\:?\\s*\\n*\\t*\\s*\\n*\\t*\\s*\\n*\\t*\\([\\s\\S]*\\)\\s*\\t*=>\\s*\\n*\\t*\\{)`
+                    )
                 );
                 if (arrowFunction.length > 1) {
                     arrowFunctionType = 2;
@@ -1880,8 +1875,8 @@ async function functionRecognizerInData(data, functionName) {
                     // Default: Traditional function
                     traditionalFunction = data.split(
                         new RegExp(
-                            `(${functionName}\\s*\\n*\\t*\\:?\\s*\\n*\\t*\\=?\\s*\\n*\\t*\\([\\s\\S]*\\)\\s*\\n*\\t*\\:?\\s*\\n*\\t*\\w*\\s*\\n*\\t*\\<?\\s*\\n*\\t*\\w*\\s*\\n*\\t*\\>?\\s*\\n*\\t*\\{)`,
-                        ),
+                            `(${functionName}\\s*\\n*\\t*\\:?\\s*\\n*\\t*\\=?\\s*\\n*\\t*\\([\\s\\S]*\\)\\s*\\n*\\t*\\:?\\s*\\n*\\t*\\w*\\s*\\n*\\t*\\<?\\s*\\n*\\t*\\w*\\s*\\n*\\t*\\>?\\s*\\n*\\t*\\{)`
+                        )
                     );
                     if (
                         traditionalFunction.length == 1 &&
@@ -1950,21 +1945,19 @@ async function functionRecognizerInData(data, functionName) {
                 if (isArrowFunction && arrowFunctionType == 1) {
                     funcStr = data.split(
                         new RegExp(
-                            `${functionName}\\s*\\n*\\t*\\:?\\s*\\n*\\t*\\w*\\s*\\n*\\t*\\=\\s*\\n*\\t*\\(`,
-                        ),
+                            `${functionName}\\s*\\n*\\t*\\:?\\s*\\n*\\t*\\w*\\s*\\n*\\t*\\=\\s*\\n*\\t*\\(`
+                        )
                     )[1];
                 }
                 if (isArrowFunction && arrowFunctionType == 2) {
                     funcStr = data.split(
                         new RegExp(
-                            `${functionName}\\s*\\n*\\t*\\:?\\s*\\n*\\t*\\s*\\n*\\t*\\s*\\n*\\t*\\(`,
-                        ),
+                            `${functionName}\\s*\\n*\\t*\\:?\\s*\\n*\\t*\\s*\\n*\\t*\\s*\\n*\\t*\\(`
+                        )
                     )[1];
                 } else if (isTraditionalFunction) {
                     funcStr = data.split(
-                        new RegExp(
-                            `${functionName}\\s*\\n*\\t*\\:?\\s*\\n*\\t*\\=?\\s*\\n*\\t*\\(`,
-                        ),
+                        new RegExp(`${functionName}\\s*\\n*\\t*\\:?\\s*\\n*\\t*\\=?\\s*\\n*\\t*\\(`)
                     )[1];
                 }
 
@@ -2004,20 +1997,20 @@ async function popFunction(data) {
 
     try {
         let arrowFunction = data.split(
-            new RegExp(`(\\s*\\n*\\t*\\([\\s\\S]*\\)\\s*\\t*=>\\s*\\n*\\t*\\{)`),
+            new RegExp(`(\\s*\\n*\\t*\\([\\s\\S]*\\)\\s*\\t*=>\\s*\\n*\\t*\\{)`)
         ); // arrow function with '{' and '}'
         let arrowFunctionWithoutCurlyBracket = [''];
         let traditionalFunction = [''];
 
         if (arrowFunction.length == 1) {
             arrowFunctionWithoutCurlyBracket = data.split(
-                new RegExp(`(\\s*\\n*\\t*\\([\\s\\S]*\\)\\s*\\t*=>)`),
+                new RegExp(`(\\s*\\n*\\t*\\([\\s\\S]*\\)\\s*\\t*=>)`)
             ); // arrow function without '{' and '}'
             if (arrowFunctionWithoutCurlyBracket.length == 1) {
                 traditionalFunction = data.split(
                     new RegExp(
-                        `(\\s*\\n*\\t*\\([\\s\\S]*\\)\\s*\\n*\\t*\\:?\\s*\\n*\\t*\\w*\\s*\\n*\\t*\\<?\\s*\\n*\\t*\\w*\\s*\\n*\\t*\\>?\\s*\\n*\\t*\\{)`,
-                    ),
+                        `(\\s*\\n*\\t*\\([\\s\\S]*\\)\\s*\\n*\\t*\\:?\\s*\\n*\\t*\\w*\\s*\\n*\\t*\\<?\\s*\\n*\\t*\\w*\\s*\\n*\\t*\\>?\\s*\\n*\\t*\\{)`
+                    )
                 ); // traditional function with '{' and '}'
             }
         }
@@ -2089,15 +2082,15 @@ function popString(data) {
             let str = data[1];
             str = str.replaceAll(
                 statics.STRING_BREAKER + '_quote1_' + statics.STRING_BREAKER,
-                '\\"',
+                '\\"'
             );
             str = str.replaceAll(
                 statics.STRING_BREAKER + '_quote2_' + statics.STRING_BREAKER,
-                "\\'",
+                "\\'"
             );
             str = str.replaceAll(
                 statics.STRING_BREAKER + '_quote3_' + statics.STRING_BREAKER,
-                '\\`',
+                '\\`'
             );
             return str;
         }
@@ -2123,5 +2116,5 @@ module.exports = {
     getSwaggerComments,
     popString,
     removeInsideParentheses,
-    dataConverter,
+    dataConverter
 };

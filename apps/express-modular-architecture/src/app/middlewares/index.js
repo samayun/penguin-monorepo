@@ -7,14 +7,17 @@ const middlewares = [
     express.json({ limit: '2048mb' }),
     express.urlencoded({
         limit: '2048mb',
-        extended: false,
+        extended: false
     }),
     fileUpload(),
     express.static('public'),
-    express.static('uploads'),
+    express.static('uploads')
 ];
 
 module.exports = app => {
+    app.disable('x-powered-by');
+    app.set('x-powered-by', 'PENGUIN');
+
     middlewares.forEach(middleware => {
         app.use(middleware);
     });

@@ -6,28 +6,28 @@ const routes = [
     {
         name: 'modules',
         type: 'module',
-        handler: modules,
+        handler: modules
     },
 
     {
         path: '/',
         handler: (req, res) => {
             res.json({
-                title: 'Welcome, you are genius. All is well 😃',
+                title: 'Welcome, you are genius. All is well 😃'
             });
-        },
+        }
     },
     {
         name: 'Swagger Route',
         path: '/docs',
-        handler: swaggerModule(),
+        handler: swaggerModule()
     },
     {
         name: 'Not Found',
         path: '*',
         handler: (req, res) => {
             res.status(404).json({ error: 'Endpoint Not Found 😢😢' });
-        },
+        }
     },
     /*
      *  Error handling middleware
@@ -44,10 +44,10 @@ const routes = [
             return res.json({
                 name: error.name || 'Error Ocurred 😢',
                 message: error.message || 'Internal Server Error 😢',
-                status: error.status || 500,
+                status: error.status || 500
             });
-        },
-    },
+        }
+    }
 ];
 
 module.exports = app => {

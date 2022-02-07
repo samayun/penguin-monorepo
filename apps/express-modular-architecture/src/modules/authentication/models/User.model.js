@@ -4,19 +4,19 @@ const modelSchema = new Schema(
     {
         name: {
             type: String,
-            require: true,
+            require: true
         },
         email: {
             type: String,
-            require: true,
+            require: true
         },
 
         password: {
             type: String,
-            require: true,
-        },
+            require: true
+        }
     },
-    { timestamps: true },
+    { timestamps: true }
 );
 
 modelSchema.methods.toJSON = function () {
