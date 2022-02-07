@@ -15,13 +15,13 @@
 </a>
 </p>
 
-# Commands & Usage
+### Commands & Usage
 
 ```bash
  #  Start Backend Express.js server
  ## NPM
  cd apps/express-modular-architecture && cp .env.example .env
- npx nx start:dev express-modular-architecture
+ npx nx dev express-modular-architecture
 
  ## Docker
  cd apps/express-modular-architecture/src
