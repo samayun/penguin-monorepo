@@ -9,8 +9,7 @@
             "options": {
                 "outputPath": "dist/apps/task-management",
                 "main": "apps/task-management/src/main.ts",
-                "tsConfig": "apps/task-management/tsconfig.app.json",
-                "assets": ["apps/task-management/src/assets"]
+                "tsConfig": "apps/task-management/tsconfig.app.json"
             },
             "configurations": {
                 "production": {
