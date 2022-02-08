@@ -6,12 +6,12 @@
     "scripts": {
         "start": "npm run build && node src/index",
         "watch:app": "nodemon -L src/index",
-        "watch:modules": "SHELL=/bin/bash chokidar \"src/**/routes/*.js\" -c \"npm run swagger\"",
+        "watch:routes": "SHELL=/bin/bash chokidar \"src/**/routes/*.js\" -c \"npm run swagger\"",
         "dev": "concurrently npm:watch:*",
         "build": "npm run swagger",
         "swagger": "cd src && node swagger.js",
-        "lint": "eslint --ignore-path .gitignore .",
-        "format": "prettier --write \"src/**/*.js\" \"test/**/*.js\""
+        "lint": "eslint --ext .js --cache --fix --ignore-path .gitignore",
+        "format": "prettier --write src/*.js"
     },
     "keywords": [
         "nodejs-framework",
@@ -45,8 +45,8 @@
     },
     "lint-staged": {
         "*.{js,}": [
-            "eslint --cache --fix",
-            "prettier --write"
+            "npm run lint",
+            "npm run format"
         ]
     }
 }
