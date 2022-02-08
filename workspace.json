@@ -1,6 +1,7 @@
 {
-  "version": 2,
-  "projects": {
-    "express-modular-architecture": "apps/express-modular-architecture"
-  }
+    "version": 2,
+    "projects": {
+        "express-modular-architecture": "apps/express-modular-architecture",
+        "task-management": "apps/task-management"
+    }
 }
