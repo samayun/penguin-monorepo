@@ -24,7 +24,7 @@
     "application/json"
   ],
   "paths": {
-    "/v1/tests/list": {
+    "/v1/tests/": {
       "get": {
         "tags": [
           ".template"

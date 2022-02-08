@@ -1,20 +1,21 @@
 require('dotenv').config();
 const express = require('express');
-const app = express();
-// Remove the X-Powered-By headers.
-app.disable('x-powered-by');
 
 const { host, port } = require('./config/server');
 
 const connectDB = require('./database/connection');
 
-// SETUP MIDDLEWARES
-const setMiddlewares = require('./app/middlewares');
-setMiddlewares(app);
+const loadGlobalMiddlewares = require('./app/middlewares');
 
-// USING ROUTES from Routes Directory
-const setRoutes = require('./routes.js');
-setRoutes(app);
+const loadRestfulRoutes = require('./routes.js');
+
+const app = express();
+
+app.disable('x-powered-by');
+
+loadGlobalMiddlewares(app);
+
+loadRestfulRoutes(app);
 
 (async function main() {
     try {
@@ -28,7 +29,7 @@ setRoutes(app);
                 '\x1b[47m\x1b[46m%s\x1b[0m',
                 `🧠 Server running on 👀`,
                 '\x1b[1m\x1b[5m',
-                `${host}:${port}`
+                `${host}:${port} 🚀`
             )
         );
     } catch (error) {
@@ -37,7 +38,6 @@ setRoutes(app);
 })();
 
 if (process.env.NODE_ENV === 'production') {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
     console.log = function () {};
 }
 

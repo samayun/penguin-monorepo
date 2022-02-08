@@ -4,13 +4,12 @@
     "projectType": "application",
     "targets": {
         "build": {
-            "executor": "@nrwl/js:tsc",
+            "executor": "@nrwl/node:build",
             "outputs": ["{options.outputPath}"],
             "options": {
                 "outputPath": "dist/apps/express-modular-architecture",
-                "main": "apps/express-modular-architecture/src/index.ts",
-                "tsConfig": "apps/express-modular-architecture/tsconfig.app.json",
-                "assets": ["apps/express-modular-architecture/*.md"]
+                "main": "apps/express-modular-architecture/src/index.js",
+                "tsConfig": "apps/express-modular-architecture/tsconfig.app.json"
             }
         },
         "serve": {
