@@ -14,7 +14,10 @@ async function main() {
     app.setGlobalPrefix(globalPrefix);
     const port = process.env.PORT || 3333;
     await app.listen(port);
-    Logger.log(`🚀 Application is running on: http://localhost:${port}/${globalPrefix}`);
+    Logger.log(
+        '\x1b[44m\x1b[47m\x1b[0m',
+        `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`,
+    );
 }
 
 main();
