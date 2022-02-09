@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { ITask } from './task.interface';
+import { randomUUID } from 'crypto';
+import { CreateTaskDto } from './dto/create-task.dto';
+import { ITask, StatusType } from './task.interface';
 
 @Injectable()
 export class TaskService {
@@ -7,19 +9,24 @@ export class TaskService {
     getAllTasks() {
         return this.tasks;
     }
-    createTask(): ITask {
-        const id = this.tasks.length + 1;
+    createTask({ title, description }: CreateTaskDto): ITask {
         const task = {
-            id,
-            title: 'Test  2',
-            description: 'Test task description 2',
-            status: 'OPEN',
+            id: randomUUID(),
+            title: title,
+            description: description,
+            status: StatusType.OPEN,
         };
         this.tasks.push(task);
         return task;
     }
 
-    getTaskById(id: number): ITask {
-        return this.tasks.find(task => task.id === id);
+    getTaskById(id: string): ITask {
+        const task = this.tasks.find(task => task.id === id);
+
+        if (task) {
+            return task;
+        } else {
+            throw new Error('Task not found');
+        }
     }
 }

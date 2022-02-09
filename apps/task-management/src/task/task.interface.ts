@@ -1,6 +1,10 @@
+export enum StatusType {
+    OPEN = 'OPEN',
+}
+
 export type ITask = {
-    id: number;
+    id: string;
     title: string;
     description: string;
-    status: string;
+    status: StatusType;
 };
