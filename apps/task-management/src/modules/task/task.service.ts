@@ -1,11 +1,18 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { randomUUID } from 'crypto';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { GetTaskFilterDto } from './dto/task-filtering.dto';
 import { ITask, TaskStatus } from './task.interface';
+import { TaskRepository } from './task.repository';
 
 @Injectable()
 export class TaskService {
+    constructor(
+        @InjectRepository(TaskRepository)
+        private readonly taskRepository: TaskRepository,
+    ) {}
+
     private tasks: ITask[] = [];
 
     getFilteredTasks(filterDto: GetTaskFilterDto): ITask[] {
