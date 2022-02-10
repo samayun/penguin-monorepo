@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { GetTaskFilterDto } from './dto/task-filtering.dto';
@@ -13,31 +13,31 @@ export class TaskService {
         private readonly taskRepository: TaskRepository,
     ) {}
 
-    getFilteredTasks(filterDto: GetTaskFilterDto): Promise<Task[]> {
+    async getFilteredTasks(filterDto: GetTaskFilterDto): Promise<Task[]> {
         const { status, search } = filterDto;
-        let tasks = this.getAllTasks();
+        let tasks = await this.getAllTasks();
         if (status) {
-            tasks = this.taskRepository.find({
+            tasks = await this.taskRepository.find({
                 where: { status },
             });
         }
         if (search) {
-            tasks = this.taskRepository.find({
-                where: { status },
+            tasks = await this.taskRepository.find({
+                where: {},
             });
         }
         return tasks;
     }
 
-    async getAllTasks() {
-        return this.taskRepository.find({});
+    getAllTasks() {
+        return this.taskRepository.find();
     }
     createTask(createTaskDto: CreateTaskDto): Promise<Task> {
         return this.taskRepository.createTask(createTaskDto);
     }
 
     async getTaskById(id: string): Promise<Task> {
-        const task = this.taskRepository.findOne(id);
+        const task = await this.taskRepository.findOne(id);
 
         if (task) {
             return task;
@@ -45,8 +45,12 @@ export class TaskService {
             throw new NotFoundException(`Task with ${id} not found`);
         }
     }
-    async deleteTaskById(id: string): Promise<void> {
-        await this.taskRepository.delete(id);
+    async deleteTaskById(id: string) {
+        const isDeleted = await this.taskRepository.delete(id);
+        if (!isDeleted) {
+            throw new BadRequestException(`Task with ${id} not found`);
+        }
+        return isDeleted && true;
     }
     async updateTaskStatus(id: string, status: TaskStatus) {
         const task = await this.taskRepository.update(

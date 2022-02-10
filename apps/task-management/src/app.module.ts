@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { env } from './environments/environment';
-import { TaskModule } from './modules/task/task.module';
+import { TaskModule } from './task/task.module';
 
 export function response<T>(data: T, message: string) {
     return {
@@ -30,7 +30,7 @@ export function reject(message: string) {
             password: env.mysql.DB_PASSWORD,
             database: env.mysql.DB_DATABASE,
             autoLoadEntities: true,
-            entities: [__dirname + '/**/*.entity{.ts,.js}'],
+            entities: [__dirname + 'src/**/*.entity{.ts,.js}'],
             synchronize: true,
         }),
     ],
