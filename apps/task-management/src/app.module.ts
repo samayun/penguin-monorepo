@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { env } from './environments/environment';
-import { TaskModule } from './task/task.module';
+import { TaskModule } from './modules/task/task.module';
 
 export function response<T>(data: T, message: string) {
     return {

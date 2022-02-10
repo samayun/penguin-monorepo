@@ -1,5 +1,5 @@
 import { TaskService } from './task.service';
-import { response, reject } from '../app.module';
+import { response, reject } from '../../app.module';
 import { CreateTaskDto } from './dto/create-task.dto';
 import {
     Controller,
