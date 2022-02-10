@@ -48,10 +48,16 @@
           {
             "name": "obj",
             "in": "body",
-            "description": "User information.",
-            "required": true,
             "schema": {
-              "$ref": "#/definitions/AddUser"
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                }
+              }
             }
           }
         ],

@@ -1,6 +1,7 @@
 // import Routes from modules or global place
 const modules = require('./modules');
 const swaggerModule = require('./app/modules/swagger/routes');
+const { apiGlobalPrefix } = require('./config/api');
 
 const routes = [
     {
@@ -60,7 +61,7 @@ module.exports = app => {
             const handlers = route.handler();
 
             handlers.routers.forEach(({ path, router }) => {
-                app.use('/api' + path, router);
+                app.use(apiGlobalPrefix + path, router);
             });
         } else if (route.path) {
             // rest routes for RESTful API

@@ -8,6 +8,7 @@ const connectDB = require('./database/connection');
 const loadGlobalMiddlewares = require('./app/middlewares');
 
 const loadRestfulRoutes = require('./routes.js');
+const { apiGlobalPrefix } = require('./config/api');
 
 const app = express();
 
@@ -29,7 +30,7 @@ loadRestfulRoutes(app);
                 '\x1b[47m\x1b[46m%s\x1b[0m',
                 `🧠 Server running on 👀`,
                 '\x1b[1m\x1b[5m',
-                `${host}:${port} 🚀`
+                `${host}:${port}${apiGlobalPrefix} 🚀`
             )
         );
     } catch (error) {

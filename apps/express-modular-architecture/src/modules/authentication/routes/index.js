@@ -14,19 +14,12 @@ const router = require('express').Router();
 module.exports = () => {
     router.post('/login', loginValidator, async (req, res, next) => {
         /* #swagger.tags = ['Authentication']
-     	#swagger.basePath = '/v1/auth'
-        #swagger.description = 'Sign in a specific user'
-
-        	#swagger.parameters['obj'] = {
-            in: 'body',
-            description: 'User information.',
-            required: true,
-            schema: { $ref: "#/definitions/AddUser" }
-    } */
+        #swagger.description = 'Sign in a specific user' */
         try {
+            const { email, password } = req.body;
             const user = await authService.login({
-                email: req.body.email,
-                password: req.body.password
+                email,
+                password
             });
             // generate access token
             const accessToken = await jwt.generateJWTToken({ ...user });
@@ -43,16 +36,12 @@ module.exports = () => {
         }
     });
 
-    /**
-     *  POST /api/auth/register
-     * { name : "Salman Akash", email: "samu@gmail.com, password: "123456"}
-     *  */
     router.post('/register', registerValidator, async (req, res, next) => {
         /* 	#swagger.tags = ['Authentication']
         #swagger.description = 'Endpoint to sign up a specific user' */
         try {
             const user = await authService.register(req.body);
-            // generate access token
+
             const accessToken = await jwt.generateJWTToken({ ...user });
 
             res.json({
@@ -64,7 +53,7 @@ module.exports = () => {
             next(error);
         }
     });
-    // GET /api/auth/profile
+
     router.get('/profile', authenticate, async (req, res, next) => {
         try {
             res.json({
@@ -76,7 +65,7 @@ module.exports = () => {
             next(error);
         }
     });
-    // GET /api/auth/users
+
     router.get('/users', authenticate, async (req, res, next) => {
         try {
             res.json({
