@@ -1,12 +1,13 @@
 import { ArgumentMetadata, BadRequestException, PipeTransform } from '@nestjs/common';
-import { StatusType } from '../task.interface';
+import { TaskStatus } from '../task.interface';
 
 export class TaskStatusValidationPipe implements PipeTransform {
-    readonly allowedStates = [StatusType.OPEN, StatusType.IN_PROGRESS, StatusType.DONE];
+    readonly allowedStates = [TaskStatus.OPEN, TaskStatus.IN_PROGRESS, TaskStatus.DONE];
 
     transform(value: any, metadata: ArgumentMetadata) {
         console.log({
             value,
+            metatype: metadata.metatype,
             metadata,
         });
         value = value.toUpperCase();

@@ -1,11 +1,29 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { randomUUID } from 'crypto';
 import { CreateTaskDto } from './dto/create-task.dto';
-import { ITask, StatusType } from './task.interface';
+import { GetTaskFilterDto } from './dto/task-filtering.dto';
+import { ITask, TaskStatus } from './task.interface';
 
 @Injectable()
 export class TaskService {
     private tasks: ITask[] = [];
+
+    getFilteredTasks(filterDto: GetTaskFilterDto): ITask[] {
+        const { status, search } = filterDto;
+        let tasks = this.getAllTasks();
+        if (status) {
+            tasks = tasks.filter(task => task.status === status);
+        }
+        if (search) {
+            tasks = tasks.filter(
+                task =>
+                    task.title.toLowerCase().includes(search) ||
+                    task.description.toLowerCase().includes(search),
+            );
+        }
+        return tasks;
+    }
+
     getAllTasks() {
         return this.tasks;
     }
@@ -14,7 +32,7 @@ export class TaskService {
             id: randomUUID(),
             title: title,
             description: description,
-            status: StatusType.OPEN,
+            status: TaskStatus.OPEN,
         };
         this.tasks.push(task);
         return task;
@@ -30,9 +48,10 @@ export class TaskService {
         }
     }
     deleteTaskById(id: string): void {
-        this.tasks = this.tasks.filter(task => task.id !== id);
+        const found = this.getTaskById(id);
+        this.tasks = this.tasks.filter(task => task.id !== found.id);
     }
-    updateTaskStatus(id: string, status: StatusType) {
+    updateTaskStatus(id: string, status: TaskStatus) {
         const task = this.tasks.find(task => task.id === id);
         task.status = status;
         return task;
