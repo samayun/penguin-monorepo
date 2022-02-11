@@ -17,7 +17,7 @@ class AuthService {
         const credentials = {
             name,
             email,
-            password: hashedPassword,
+            password: hashedPassword
         };
         // back user details
         return await User.create(credentials);

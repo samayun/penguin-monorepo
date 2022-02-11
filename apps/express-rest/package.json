@@ -1,5 +1,5 @@
 {
-    "name": "@penguin/express-modular-architecture",
+    "name": "@penguin/express-rest",
     "version": "0.0.1",
     "author": "Samayun Miah Chowdhury<samayun.m.chowdhury@gmail.com>",
     "description": "Penguin is an opinionated express framework provides rapid development facility",

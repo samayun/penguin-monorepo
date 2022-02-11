@@ -1,5 +1,5 @@
 module.exports = {
-    displayName: 'express-modular-architecture',
+    displayName: 'express-rest',
     preset: '../../jest.preset.js',
     globals: {
         'ts-jest': {
@@ -10,5 +10,5 @@ module.exports = {
         '^.+\\.[tj]s$': 'ts-jest'
     },
     moduleFileExtensions: ['ts', 'js', 'html'],
-    coverageDirectory: '../../coverage/apps/express-modular-architecture'
+    coverageDirectory: '../../coverage/apps/express-rest'
 };

@@ -14,7 +14,7 @@ module.exports = function (args) {
         language: null,
         disableLogs: false,
         disableWarnings: false,
-        openapi: null,
+        openapi: null
     };
     let recLang = null;
     if (args && typeof args === 'string') {
@@ -33,7 +33,7 @@ module.exports = function (args) {
         endpointsFiles,
         data,
         semibasePath,
-        setApiDefaultBasepath = false,
+        setApiDefaultBasepath = false
     ) => {
         try {
             if (!outputFile) throw console.error("\nError: 'outputFile' was not specified.");
@@ -104,7 +104,7 @@ module.exports = function (args) {
                             'Swagger-autogen:',
                             '\x1b[31m',
                             'Failed ' + symbols.failed,
-                            '\x1b[0m',
+                            '\x1b[0m'
                         );
                     }
                     return false;
@@ -140,7 +140,7 @@ module.exports = function (args) {
                             'Swagger-autogen:',
                             '\x1b[31m',
                             'Failed ' + symbols.failed,
-                            '\x1b[0m',
+                            '\x1b[0m'
                         );
                     }
                     return false;
@@ -159,17 +159,17 @@ module.exports = function (args) {
                         ...swaggerTags.formatDefinitions(
                             objDoc.definitions[definition],
                             {},
-                            constainXML,
+                            constainXML
                         ),
-                        xml: { name: definition },
+                        xml: { name: definition }
                     };
                 } else {
                     objDoc.definitions[definition] = {
                         ...swaggerTags.formatDefinitions(
                             objDoc.definitions[definition],
                             {},
-                            constainXML,
-                        ),
+                            constainXML
+                        )
                     };
                 }
             });
@@ -186,15 +186,15 @@ module.exports = function (args) {
                         if (objDoc.schemes && objDoc.schemes.length > 0) {
                             objDoc.schemes.forEach(scheme => {
                                 objDoc.servers.push({
-                                    url: scheme + '://' + objDoc.host,
+                                    url: scheme + '://' + objDoc.host
                                 });
                             });
                         } else {
                             objDoc.host = 'http://' + objDoc.host;
                             objDoc.servers = [
                                 {
-                                    url: objDoc.host,
-                                },
+                                    url: objDoc.host
+                                }
                             ];
                         }
                     }
@@ -212,17 +212,17 @@ module.exports = function (args) {
                                 ...swaggerTags.formatDefinitions(
                                     objDoc.components.schemas[schema],
                                     {},
-                                    constainXML,
+                                    constainXML
                                 ),
-                                xml: { name: schema },
+                                xml: { name: schema }
                             };
                         } else {
                             objDoc.components.schemas[schema] = {
                                 ...swaggerTags.formatDefinitions(
                                     objDoc.components.schemas[schema],
                                     {},
-                                    constainXML,
-                                ),
+                                    constainXML
+                                )
                             };
                         }
                     });
@@ -234,7 +234,7 @@ module.exports = function (args) {
                             let auxExample = { ...objDoc.components.examples[example] };
                             delete objDoc.components.examples[example];
                             objDoc.components.examples[example] = {
-                                value: auxExample,
+                                value: auxExample
                             };
                         }
                     });
@@ -250,7 +250,7 @@ module.exports = function (args) {
 
                     objDoc.components.schemas = {
                         ...objDoc.components.schemas,
-                        ...objDoc.definitions,
+                        ...objDoc.definitions
                     };
 
                     delete objDoc.definitions;
@@ -269,7 +269,7 @@ module.exports = function (args) {
 
                     objDoc.components.securitySchemes = {
                         ...objDoc.components.securitySchemes,
-                        ...objDoc.securityDefinitions,
+                        ...objDoc.securityDefinitions
                     };
 
                     delete objDoc.securityDefinitions;
@@ -305,7 +305,7 @@ module.exports = function (args) {
             let dataJSON = JSON.stringify(objDoc, null, 2);
             if (!fs.existsSync(outputFile)) {
                 fs.writeFileSync(outputFile, dataJSON, {
-                    flag: 'wx',
+                    flag: 'wx'
                 });
             } else {
                 fs.writeFileSync(outputFile, dataJSON);
@@ -316,7 +316,7 @@ module.exports = function (args) {
                     'Swagger-autogen:',
                     '\x1b[32m',
                     'Success ' + symbols.success,
-                    '\x1b[0m',
+                    '\x1b[0m'
                 );
             }
             return { success: true, data: objDoc };

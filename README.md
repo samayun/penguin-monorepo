@@ -20,11 +20,11 @@
 ```bash
  #  Start Backend Express.js server
  ## NPM
- cd apps/express-modular-architecture && cp .env.example .env
- npx nx dev express-modular-architecture
+ cd apps/express-rest && cp .env.example .env
+ npx nx dev express-rest
 
  ## Docker
- cd apps/express-modular-architecture/src
+ cd apps/express-rest/src
  make build
  make run
  # detach mode >>

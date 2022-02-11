@@ -1,7 +1,7 @@
 {
     "version": 2,
     "projects": {
-        "express-modular-architecture": "apps/express-modular-architecture",
+        "express-rest": "apps/express-rest",
         "task-management": "apps/task-management"
     }
 }
