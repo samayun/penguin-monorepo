@@ -25,14 +25,16 @@ loadRestfulRoutes(app);
         /*
          * Listen to server
          */
-        app.listen(port, () =>
+        app.listen(port, () => {
             console.log(
                 '\x1b[47m\x1b[46m%s\x1b[0m',
                 `🧠 Server running on 👀`,
                 '\x1b[1m\x1b[5m',
                 `${host}:${port}${apiGlobalPrefix} 🚀`
-            )
-        );
+            );
+
+            console.log(`Read docs here : ${host}:${port}${'/docs'} 🚀`);
+        });
     } catch (error) {
         console.log(error || 'Server Down');
     }

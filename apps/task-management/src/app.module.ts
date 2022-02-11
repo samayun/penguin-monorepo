@@ -1,8 +1,13 @@
 import { Module } from '@nestjs/common';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { env } from './environments/environment';
 import { TaskModule } from './task/task.module';
 import { PetsModule } from './pets/pets.module';
+import { LessionModule } from './lession/lession.module';
+import { Pet } from './pets/pet.entity';
 
 export function response<T>(data: T, message: string) {
     return {
@@ -22,7 +27,7 @@ export function reject(message: string) {
 
 @Module({
     imports: [
-        TaskModule,
+        PetsModule,
         // TypeOrmModule.forRoot({
         //     type: 'mysql',
         //     host: env.mysql.DB_HOST,
@@ -37,13 +42,17 @@ export function reject(message: string) {
         TypeOrmModule.forRoot({
             type: 'mongodb',
             url: env.mongodb.MONGODB_CONNECTION_STRING,
-            database: env.mongodb.MONGODB_DATABASE,
-            entities: [__dirname + 'src/**/*.entity{.ts,.js}'],
-            ssl: true,
+            // database: env.mongodb.MONGODB_DATABASE,
+            entities: [Pet],
+            // ssl: true,
             useUnifiedTopology: true,
             useNewUrlParser: true,
         }),
-        PetsModule,
+        // LessionModule,
+        // GraphQLModule.forRoot<ApolloDriverConfig>({
+        //     driver: ApolloDriver,
+        //     typePaths: ['./**/*.graphql'],
+        // }),
     ],
 })
 export class AppModule {}
