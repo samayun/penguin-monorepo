@@ -5,19 +5,27 @@
 
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-
 import { AppModule } from './app.module';
+import { globalPrefix, swaggerPrefix } from './config/api';
+import serverConfig from './config/server';
+import loadSwaggerModule from './swagger';
 
 async function main() {
     const app = await NestFactory.create(AppModule);
-    const globalPrefix = 'api/v1/';
+    const { host, port } = serverConfig;
+
     app.setGlobalPrefix(globalPrefix);
-    const port = process.env.PORT || 3333;
+
+    loadSwaggerModule(app);
+
     await app.listen(port);
+
     Logger.log(
         '\x1b[44m\x1b[47m\x1b[0m',
-        `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`,
+        `🚀 Application is running on: ${host}:${port}/${globalPrefix}`,
     );
+
+    Logger.verbose(`🚀 Documentation is here =>  ${host}:${port}/${swaggerPrefix}`);
 }
 
 main();
