@@ -1,0 +1,38 @@
+{
+    "root": "apps/modular-monolith",
+    "sourceRoot": "apps/modular-monolith/src",
+    "projectType": "application",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/node:build",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "outputPath": "dist/apps/modular-monolith",
+                "main": "apps/modular-monolith/src/index.ts",
+                "tsConfig": "apps/modular-monolith/tsconfig.app.json"
+            }
+        },
+        "serve": {
+            "executor": "@nrwl/node:execute",
+            "options": {
+                "buildTarget": "modular-monolith:build"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["apps/modular-monolith/**/*.ts"]
+            }
+        },
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": ["coverage/apps/modular-monolith"],
+            "options": {
+                "jestConfig": "apps/modular-monolith/jest.config.js",
+                "passWithNoTests": true
+            }
+        }
+    },
+    "tags": []
+}

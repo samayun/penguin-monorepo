@@ -6,9 +6,9 @@
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { globalPrefix, swaggerPrefix } from './config/api';
-import serverConfig from './config/server';
-import loadSwaggerModule from './swagger';
+import serverConfig from '@/config/server';
+import loadSwaggerModule from '@/swagger';
+import { globalPrefix, swaggerPrefix } from '@/config/api';
 
 async function main() {
     const app = await NestFactory.create(AppModule);

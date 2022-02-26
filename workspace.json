@@ -2,6 +2,7 @@
     "version": 2,
     "projects": {
         "express-rest": "apps/express-rest",
+        "modular-monolith": "apps/modular-monolith",
         "task-management": "apps/task-management"
     }
 }
