@@ -1,35 +1,35 @@
 {
-    "root": "apps/express-rest",
-    "sourceRoot": "apps/express-rest/src",
+    "root": "apps/express-rest-api",
+    "sourceRoot": "apps/express-rest-api/src",
     "projectType": "application",
     "targets": {
         "build": {
             "executor": "@nrwl/node:build",
             "outputs": ["{options.outputPath}"],
             "options": {
-                "outputPath": "dist/apps/express-rest",
-                "main": "apps/express-rest/src/index.js",
-                "tsConfig": "apps/express-rest/tsconfig.app.json"
+                "outputPath": "dist/apps/express-rest-api",
+                "main": "apps/express-rest-api/src/index.js",
+                "tsConfig": "apps/express-rest-api/tsconfig.app.json"
             }
         },
         "serve": {
             "executor": "@nrwl/js:node",
             "options": {
-                "buildTarget": "express-rest:build"
+                "buildTarget": "express-rest-api:build"
             }
         },
         "lint": {
             "executor": "@nrwl/linter:eslint",
             "outputs": ["{options.outputFile}"],
             "options": {
-                "lintFilePatterns": ["apps/express-rest/src/**/*.js"]
+                "lintFilePatterns": ["apps/express-rest-api/src/**/*.js"]
             }
         },
         "test": {
             "executor": "@nrwl/jest:jest",
-            "outputs": ["coverage/apps/express-rest"],
+            "outputs": ["coverage/apps/express-rest-api"],
             "options": {
-                "jestConfig": "apps/express-rest/jest.config.js",
+                "jestConfig": "apps/express-rest-api/jest.config.js",
                 "passWithNoTests": true
             }
         }
